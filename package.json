@@ -1,0 +1,26 @@
+{
+	"devDependencies": {
+		"parcel-bundler": "^1.9.4",
+		"parcel-plugin-typescript": "^1.0.0",
+		"typescript": "^3.3.3333"
+	},
+	"name": "typescript",
+	"version": "1.0.0",
+	"main": "index.js",
+	"dependencies": {},
+	"scripts": {
+		"start": "parcel index.html"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MichaelCheco/react-typescript.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/MichaelCheco/react-typescript/issues"
+	},
+	"homepage": "https://github.com/MichaelCheco/react-typescript#readme",
+	"description": ""
+}
