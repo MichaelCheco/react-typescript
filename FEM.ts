@@ -48,3 +48,16 @@ let otherContactInfo: HasEmail & HasPhoneNumber = {
 otherContactInfo.name; // NOTE: We can access anything on _either
 otherContactInfo.email;
 otherContactInfo.phone;
+
+// Wider vs Narrower
+// Describes: relative differences in range of a type's allowable values
+
+// Wide ---> Narrrow 👇
+/**
+ * ANYTHING any
+ * ARRAY any[]
+ * array of strings string[]
+ * ARRAY OF 3 [string, string, string]
+ * ... ["abc", 'def, string]
+ * NOTHING never
+ */
