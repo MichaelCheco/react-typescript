@@ -160,3 +160,34 @@ invokeSoon(() => bound(), 500);
 
 // ✅ call/apply work as well
 invokeSoon(() => sendMessage.apply(c, ['phone']), 500);
+
+// Interfaces & Type Aliases
+
+// TYPE ALIASES
+
+// (1) Type aliases allow us to give a type a name
+
+type StringOrNumber = string | number;
+
+// this is the ONLY time you'll see a type on the Right Hand Side fo Assignment
+type hasName = { name: string };
+
+// ❌ self-referencing types don't work!
+type NumVal = 1 | 2 | 3 | NumArr;
+type NumArr = NumVal[];
+
+// (2) Interfaces can extend from other interfaces
+
+export interface HasInternationalPhoneNumber extends HasPhoneNumber {
+	countryCode: string;
+}
+
+// (3) They can also be used to describe call signatures
+
+interface ContactMessenger1 {
+	(contact: HasEmail | HasPhoneNumber, message: string): void;
+}
+type ContactMessenger2 = (
+	contact: HasEmail | HasPhoneNumber,
+	message: string
+) => void;
