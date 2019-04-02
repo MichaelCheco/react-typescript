@@ -246,3 +246,5 @@ export class Contact implements HasEmail {
 class ParamPropContact implements HasEmail {
 	constructor(public name: string, public email: string = 'no email') {}
 }
+
+// Generics
