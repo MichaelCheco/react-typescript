@@ -191,3 +191,43 @@ type ContactMessenger2 = (
 	contact: HasEmail | HasPhoneNumber,
 	message: string
 ) => void;
+
+// // NOTE: we don't need any type annotations for contact or message
+const emailer: ContactMessenger1 = (_contact, _message) => {
+	/** ...  */
+};
+
+// Dictionary Objects & Index Signatures
+
+interface PhoneNumberDict {
+	// arr[0], foo['myProp']
+	[numberName: string]:
+		| undefined
+		| {
+				areaCode: number;
+				num: number;
+		  };
+}
+
+const phoneDict: PhoneNumberDict = {
+	office: { areaCode: 321, num: 55512121 },
+	home: { areaCode: 123, num: 34324234234 },
+};
+
+// augment the existing PhoneNumberDict
+
+interface PhoneNumberDict {
+	home: {
+		areaCode: number;
+		num: number;
+	};
+	office: {
+		areaCode: number;
+		num: number;
+	};
+}
+
+/**
+ * Type Aliases are eager, Interfaces are lazy
+ * Type Aliases are extremely flexible, Interfaces are things you would want to use for things that are objects, including functions/arrays
+ */
