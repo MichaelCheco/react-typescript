@@ -248,3 +248,103 @@ class ParamPropContact implements HasEmail {
 }
 
 // Generics
+
+// (1) Generics allow us to parameterize types in the same way that functions parameterize values
+
+// param determines the value of x
+function wrappedValue(x: any) {
+	return {
+		value: x,
+	};
+}
+
+// type param determines the type of x
+interface WrappedValue<T> {
+	value: T;
+}
+let val: WrappedValue<string[]> = { value: [] };
+
+// for Array.prototype.filter
+
+interface FilterFunction<T = any> {
+	(val: T): boolean;
+}
+
+const stringFilter: FilterFunction<string> = val => typeof val === 'string';
+
+function arrayToDict<T extends { id: string }>(array: T[]): { [k: string]: T } {
+	const out: { [k: string]: T } = {};
+	array.forEach(val => {
+		out[val.id] = val;
+	});
+	return out;
+}
+
+// When to use generics
+
+// - Generics are necessary when we want to describe a relationship of 2 things
+
+// TOP TYPES - can hold any value
+
+let myAny: any = 32;
+let myUnknown: unknown = 'hello, unkown';
+
+// We can do whatever we want with any, but nothing with unknown
+
+// (2) When to use `any`
+// Anys are good for areas of our programs where we want maximum flexibility
+//Example: sometimes a Promise<any> is fine when we don't care at all
+
+async function logWhenResolved(p: Promise<any>) {
+	const val = await p;
+	console.log('Resolved to : ', val);
+}
+
+// (3) When to use `unknown`
+// Unknowns are good for 'private' values that we don't want to expose
+// They can still hold any value, we just must narrow the type before it's used (type guard)
+
+// Built in type guards
+myUnknown.split(', '); // ❌ Error
+if (typeof myUnknown === 'string') {
+	myUnknown.split(', ');
+}
+
+if (myUnknown instanceof Promise) {
+	// in here, myUnknown is of type Promise<any>
+	myUnknown.then(x => console.log(x));
+}
+
+// User Defined Type Guards
+
+function isHasEmail(x: any): x is HasEmail {
+	return typeof x.name === 'string' && typeof x.email === 'string'; // boolean
+}
+
+if (isHasEmail(myUnknown)) {
+	// in here, myUnknown is of type HasEmail
+	console.log(myUnknown.name);
+}
+
+// My most common guard
+
+function isDefined<T>(arg: T | undefined): arg is T {
+	return typeof arg !== 'undefined';
+}
+
+const list = ['a', 'b', undefined, 'd'];
+const filtered = list.filter(isDefined);
+
+// Bottom Types can hold no values : never
+
+// a common place where you'll end up with a never is through narrowing exhaustively
+
+let y = 4 as string | number;
+
+if (typeof y === 'string') {
+	y.split(', ');
+} else if (typeof y === 'number') {
+	y.toFixed(2);
+} else {
+	throw new Error(`${y} should be a string or nummber`);
+}
