@@ -231,3 +231,18 @@ interface PhoneNumberDict {
  * Type Aliases are eager, Interfaces are lazy
  * Type Aliases are extremely flexible, Interfaces are things you would want to use for things that are objects, including functions/arrays
  */
+
+// CLASSES
+
+export class Contact implements HasEmail {
+	email: string;
+	name: string;
+	constructor(name: string, email: string) {
+		this.email = email;
+		this.name = name;
+	}
+}
+
+class ParamPropContact implements HasEmail {
+	constructor(public name: string, public email: string = 'no email') {}
+}
