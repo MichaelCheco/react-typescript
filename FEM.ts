@@ -348,3 +348,13 @@ if (typeof y === 'string') {
 } else {
 	throw new Error(`${y} should be a string or nummber`);
 }
+
+var foo = (...args: number[]): number => {
+  let sum = 0
+  for (let arg of args) {
+    sum += arg
+    console.log(sum)
+  }
+  return sum
+}
+console.log(foo(1,2,3,4,5)) 
